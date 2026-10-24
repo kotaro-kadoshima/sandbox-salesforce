@@ -1,0 +1,12 @@
+{
+  "records": [
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP1" }, "Name": "北斗電機 車載ECU向けコンデンサ 2027年度", "StageName": "Proposal/Price Quote", "CloseDate": "2026-12-18", "Amount": 4800000, "AccountId": "@ACC1" },
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP2" }, "Name": "北斗電機 試作用サンプル提供", "StageName": "Closed Won", "CloseDate": "2026-09-30", "Amount": 300000, "AccountId": "@ACC1" },
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP3" }, "Name": "みなと精工 センサー部品 年間契約", "StageName": "Negotiation/Review", "CloseDate": "2026-11-27", "Amount": 12000000, "AccountId": "@ACC2" },
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP4" }, "Name": "青空モビリティ EV電源モジュール 共同評価", "StageName": "Qualification", "CloseDate": "2027-02-26", "Amount": 25000000, "AccountId": "@ACC3" },
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP5" }, "Name": "青空モビリティ 通信モジュール 追加発注", "StageName": "Prospecting", "CloseDate": "2027-03-31", "Amount": 6000000, "AccountId": "@ACC3" },
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP6" }, "Name": "ひかり通信 5G基地局向けフィルタ", "StageName": "Value Proposition", "CloseDate": "2027-01-29", "Amount": 9500000, "AccountId": "@ACC4" },
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP7" }, "Name": "ひかり通信 保守部品", "StageName": "Closed Lost", "CloseDate": "2026-08-31", "Amount": 1200000, "AccountId": "@ACC4" },
+    { "attributes": { "type": "Opportunity", "referenceId": "OPP8" }, "Name": "紬テクノロジーズ IoTデバイス向け無線モジュール", "StageName": "Prospecting", "CloseDate": "2027-03-15", "Amount": 800000, "AccountId": "@ACC5" }
+  ]
+}

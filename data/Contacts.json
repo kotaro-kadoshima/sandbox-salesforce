@@ -1,0 +1,12 @@
+{
+  "records": [
+    { "attributes": { "type": "Contact", "referenceId": "CON1" }, "LastName": "佐藤", "FirstName": "美咲", "Title": "購買部 課長", "Email": "misaki.sato@hokuto.example.com", "AccountId": "@ACC1" },
+    { "attributes": { "type": "Contact", "referenceId": "CON2" }, "LastName": "高橋", "FirstName": "健", "Title": "技術部 主任", "Email": "ken.takahashi@hokuto.example.com", "AccountId": "@ACC1" },
+    { "attributes": { "type": "Contact", "referenceId": "CON3" }, "LastName": "伊藤", "FirstName": "直樹", "Title": "調達グループ マネージャー", "Email": "naoki.ito@minato.example.com", "AccountId": "@ACC2" },
+    { "attributes": { "type": "Contact", "referenceId": "CON4" }, "LastName": "加藤", "FirstName": "真理", "Title": "品質保証部", "Email": "mari.kato@minato.example.com", "AccountId": "@ACC2" },
+    { "attributes": { "type": "Contact", "referenceId": "CON5" }, "LastName": "渡辺", "FirstName": "由佳", "Title": "開発本部 部長", "Email": "yuka.watanabe@aozora.example.com", "AccountId": "@ACC3" },
+    { "attributes": { "type": "Contact", "referenceId": "CON6" }, "LastName": "山本", "FirstName": "翔", "Title": "購買部", "Email": "sho.yamamoto@aozora.example.com", "AccountId": "@ACC3" },
+    { "attributes": { "type": "Contact", "referenceId": "CON7" }, "LastName": "中村", "FirstName": "陽菜", "Title": "製品企画部 課長", "Email": "hina.nakamura@hikari.example.com", "AccountId": "@ACC4" },
+    { "attributes": { "type": "Contact", "referenceId": "CON8" }, "LastName": "小林", "FirstName": "大輔", "Title": "代表取締役", "Email": "daisuke.kobayashi@tsumugi.example.com", "AccountId": "@ACC5" }
+  ]
+}

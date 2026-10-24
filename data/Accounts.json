@@ -1,0 +1,9 @@
+{
+  "records": [
+    { "attributes": { "type": "Account", "referenceId": "ACC1" }, "Name": "北斗電機株式会社", "Site": "cli-handson", "Industry": "Electronics", "Type": "Customer - Direct", "BillingCity": "札幌市", "NumberOfEmployees": 1200 },
+    { "attributes": { "type": "Account", "referenceId": "ACC2" }, "Name": "みなと精工株式会社", "Site": "cli-handson", "Industry": "Manufacturing", "Type": "Customer - Direct", "BillingCity": "横浜市", "NumberOfEmployees": 480 },
+    { "attributes": { "type": "Account", "referenceId": "ACC3" }, "Name": "青空モビリティ株式会社", "Site": "cli-handson", "Industry": "Transportation", "Type": "Prospect", "BillingCity": "名古屋市", "NumberOfEmployees": 3500 },
+    { "attributes": { "type": "Account", "referenceId": "ACC4" }, "Name": "ひかり通信株式会社", "Site": "cli-handson", "Industry": "Communications", "Type": "Customer - Channel", "BillingCity": "大阪市", "NumberOfEmployees": 860 },
+    { "attributes": { "type": "Account", "referenceId": "ACC5" }, "Name": "紬テクノロジーズ株式会社", "Site": "cli-handson", "Industry": "Technology", "Type": "Prospect", "BillingCity": "福岡市", "NumberOfEmployees": 150 }
+  ]
+}
