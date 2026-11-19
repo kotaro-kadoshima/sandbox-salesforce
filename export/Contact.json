@@ -1,0 +1,84 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef1"
+            },
+            "LastName": "佐藤",
+            "FirstName": "美咲",
+            "Email": "misaki.sato@hokuto.example.com",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef2"
+            },
+            "LastName": "高橋",
+            "FirstName": "健",
+            "Email": "ken.takahashi@hokuto.example.com",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef3"
+            },
+            "LastName": "伊藤",
+            "FirstName": "直樹",
+            "Email": "naoki.ito@minato.example.com",
+            "AccountId": "@AccountRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef4"
+            },
+            "LastName": "加藤",
+            "FirstName": "真理",
+            "Email": "mari.kato@minato.example.com",
+            "AccountId": "@AccountRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef5"
+            },
+            "LastName": "渡辺",
+            "FirstName": "由佳",
+            "Email": "yuka.watanabe@aozora.example.com",
+            "AccountId": "@AccountRef3"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef6"
+            },
+            "LastName": "山本",
+            "FirstName": "翔",
+            "Email": "sho.yamamoto@aozora.example.com",
+            "AccountId": "@AccountRef3"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef7"
+            },
+            "LastName": "中村",
+            "FirstName": "陽菜",
+            "Email": "hina.nakamura@hikari.example.com",
+            "AccountId": "@AccountRef4"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef8"
+            },
+            "LastName": "小林",
+            "FirstName": "大輔",
+            "Email": "daisuke.kobayashi@tsumugi.example.com",
+            "AccountId": "@AccountRef5"
+        }
+    ]
+}

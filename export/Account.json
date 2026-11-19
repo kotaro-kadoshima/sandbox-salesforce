@@ -1,0 +1,50 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef1"
+            },
+            "Name": "北斗電機株式会社",
+            "Site": "cli-handson",
+            "Industry": "Electronics",
+            "Priority__c": "最優先"
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef2"
+            },
+            "Name": "みなと精工株式会社",
+            "Site": "cli-handson",
+            "Industry": "Manufacturing"
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef3"
+            },
+            "Name": "青空モビリティ株式会社",
+            "Site": "cli-handson",
+            "Industry": "Transportation"
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef4"
+            },
+            "Name": "ひかり通信株式会社",
+            "Site": "cli-handson",
+            "Industry": "Communications"
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef5"
+            },
+            "Name": "紬テクノロジーズ株式会社",
+            "Site": "cli-handson",
+            "Industry": "Technology"
+        }
+    ]
+}
