@@ -1,0 +1,61 @@
+{
+  "title": "Account Pipeline Card",
+  "description": "Displays an account's open opportunities and their total amount, with a link to the account record.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "id": {
+          "title": "Account ID",
+          "description": "Account record id.",
+          "lightning:type": "lightning__textType"
+        },
+        "name": {
+          "title": "Account Name",
+          "description": "Account name shown in the card heading.",
+          "lightning:type": "lightning__textType"
+        },
+        "industry": {
+          "title": "Industry",
+          "description": "Industry of the account.",
+          "lightning:type": "lightning__textType"
+        },
+        "billingCity": {
+          "title": "City",
+          "description": "Billing city of the account.",
+          "lightning:type": "lightning__textType"
+        },
+        "openAmount": {
+          "title": "Open Amount",
+          "description": "Total amount of open opportunities.",
+          "lightning:type": "lightning__numberType"
+        },
+        "openAmountLabel": {
+          "title": "Open Amount Label",
+          "description": "Formatted total amount, for example ¥4,800,000.",
+          "lightning:type": "lightning__textType"
+        },
+        "openCount": {
+          "title": "Open Count",
+          "description": "Number of open opportunities.",
+          "lightning:type": "lightning__numberType"
+        },
+        "accountRecordLink": {
+          "title": "Account Record Link",
+          "description": "Absolute URL to the account record page, used by the button.",
+          "lightning:type": "lightning__urlType",
+          "lightning:allowedUrlSchemes": ["https"]
+        },
+        "opportunities": {
+          "title": "Open Opportunities",
+          "description": "Open opportunities, each with a name, stage, close date and amount.",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "@apexClassType/c__GetAccountPipelineAction$OpportunityItem"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "type": "lightning__agentforceWidget",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/column",
+          "attributes": { "gap": "md" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "xs" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "align": "center" },
+                  "children": [
+                    {
+                      "definition": "tile/icon",
+                      "attributes": { "name": "building", "alt": "" }
+                    },
+                    {
+                      "definition": "tile/text",
+                      "attributes": { "text": "{!$attrs.name}", "variant": "h2" }
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/text",
+                  "attributes": {
+                    "text": "{!$attrs.industry} · {!$attrs.billingCity}",
+                    "variant": "caption",
+                    "color": "muted"
+                  }
+                }
+              ]
+            },
+            {
+              "definition": "tile/separator",
+              "attributes": { "orientation": "horizontal" }
+            },
+            {
+              "definition": "tile/row",
+              "attributes": { "gap": "md", "justify": "between", "align": "center" },
+              "children": [
+                {
+                  "definition": "tile/text",
+                  "attributes": {
+                    "text": "未クローズ合計（{!$attrs.openCount} 件）",
+                    "variant": "body",
+                    "weight": "semibold",
+                    "color": "muted"
+                  }
+                },
+                {
+                  "definition": "tile/text",
+                  "attributes": {
+                    "text": "{!$attrs.openAmountLabel}",
+                    "variant": "h2",
+                    "color": "success"
+                  }
+                }
+              ]
+            },
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "xs" },
+              "meta": {
+                "forEach": "{!$attrs.opportunities}",
+                "forItem": "$item"
+              },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "justify": "between", "align": "center" },
+                  "children": [
+                    {
+                      "definition": "tile/text",
+                      "attributes": { "text": "{!$item.name}", "variant": "h4", "weight": "semibold" }
+                    },
+                    {
+                      "definition": "tile/badge",
+                      "attributes": { "label": "{!$item.amountLabel}", "variant": "info" }
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/text",
+                  "attributes": {
+                    "text": "{!$item.stageName} · 完了予定 {!$item.closeDateLabel}",
+                    "variant": "caption",
+                    "color": "muted"
+                  }
+                },
+                {
+                  "definition": "tile/separator",
+                  "attributes": { "orientation": "horizontal" }
+                }
+              ]
+            },
+            {
+              "definition": "tile/button",
+              "attributes": {
+                "label": "取引先を開く",
+                "variant": "primary",
+                "iconName": "open-in-new",
+                "actions": {
+                  "click": [
+                    {
+                      "definition": "action/openLink",
+                      "attributes": {
+                        "url": "{!$attrs.accountRecordLink}",
+                        "target": "_blank"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

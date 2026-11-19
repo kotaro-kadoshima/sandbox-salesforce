@@ -8,7 +8,9 @@
             <apiSource>API_CATALOG</apiSource>
             <operation>GetAccountPipelineAction</operation>
         </apiDefinition>
-        <descriptionOverride>Returns the open opportunities and their total amount for one account, looked up by (part of) the account name.</descriptionOverride>
+        <uiResource>accountPipelineCard</uiResource>
+        <descriptionOverride>Returns the open opportunities and their total amount for one account. Send exactly one object in inputs: the result renders as a widget only for a single request. For several accounts, call the tool once for each.</descriptionOverride>
+        <!-- <descriptionOverride>Returns the open opportunities and their total amount for one account, looked up by (part of) the account name.</descriptionOverride> -->
         <destructive>false</destructive>
         <idempotent>false</idempotent>
         <openWorld>false</openWorld>
@@ -17,4 +19,10 @@
         <toolName>GetAccountPipelineActionapex_GetAccountPipelineAction</toolName>
         <toolTitle>GetAccountPipelineAction</toolTitle>
     </tools>
+    <resources>
+        <resourceName>accountPipelineCard</resourceName>
+        <resourceUri>ui://widget/lightningType/c__accountPipelineCard</resourceUri>
+        <resourceTitle>Account Pipeline Card</resourceTitle>
+        <description>Represents an account's open pipeline.</description>
+    </resources>
 </McpServerDefinition>

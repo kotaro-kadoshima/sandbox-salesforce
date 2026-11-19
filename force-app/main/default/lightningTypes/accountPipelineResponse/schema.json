@@ -1,0 +1,15 @@
+{
+  "title": "Account Pipeline Response",
+  "description": "Output of the GetAccountPipelineAction invocable action (payload inside the MCP envelope).",
+  "type": "object",
+  "lightning:type": "lightning__objectType",
+  "lightning:tags": ["mcp"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "pipeline": {
+      "title": "Pipeline",
+      "description": "Open opportunities of the account, from GetAccountPipelineAction.AccountPipeline.",
+      "lightning:type": "@apexClassType/c__GetAccountPipelineAction$AccountPipeline"
+    }
+  }
+}   
