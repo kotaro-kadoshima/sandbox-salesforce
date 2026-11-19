@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<McpServerDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>取引先名（一部でも可）を受け取り、その取引先の未クローズ商談と合計を返すアクション</description>
+    <masterLabel>Handson Pipeline Server</masterLabel>
+    <tools>
+        <apiDefinition>
+            <apiIdentifier>aa:apex-GetAccountPipelineAction</apiIdentifier>
+            <apiSource>API_CATALOG</apiSource>
+            <operation>GetAccountPipelineAction</operation>
+        </apiDefinition>
+        <descriptionOverride>Returns the open opportunities and their total amount for one account, looked up by (part of) the account name.</descriptionOverride>
+        <destructive>false</destructive>
+        <idempotent>false</idempotent>
+        <openWorld>false</openWorld>
+        <readOnly>false</readOnly>
+        <returnDirect>false</returnDirect>
+        <toolName>GetAccountPipelineActionapex_GetAccountPipelineAction</toolName>
+        <toolTitle>GetAccountPipelineAction</toolTitle>
+    </tools>
+</McpServerDefinition>
