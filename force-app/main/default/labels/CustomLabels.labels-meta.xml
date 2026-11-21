@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>DataNotice_Title</fullName>
+        <categories>McpDataNotice</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MCP data notice: title</shortDescription>
+        <value>機密情報の取り扱いに注意してください</value>
+    </labels>
+    <labels>
+        <fullName>DataNotice_Confidential</fullName>
+        <categories>McpDataNotice</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MCP data notice: may contain confidential data</shortDescription>
+        <value>Salesforce のデータには、機密情報が含まれている可能性があります。</value>
+    </labels>
+    <labels>
+        <fullName>DataNotice_ShareCheck</fullName>
+        <categories>McpDataNotice</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MCP data notice: check before sharing</shortDescription>
+        <value>内容を共有・転記するときは、共有先と内容を必ず確認してください。</value>
+    </labels>
+    <labels>
+        <fullName>DataNotice_Responsibility</fullName>
+        <categories>McpDataNotice</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MCP data notice: user is responsible</shortDescription>
+        <value>情報の取り扱いの責任は、利用者ご本人にあります。</value>
+    </labels>
+</CustomLabels>
