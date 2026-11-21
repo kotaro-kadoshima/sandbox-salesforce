@@ -1,4 +1,12 @@
 {
+  "extraKnownMarketplaces": {
+    "salesforce": {
+      "source": {
+        "source": "github",
+        "repo": "forcedotcom/sf-skills"
+      }
+    }
+  },
   "enabledPlugins": {
     "salesforce-development@salesforce": true,
     "platform-lightning-widgets@salesforce": true,
