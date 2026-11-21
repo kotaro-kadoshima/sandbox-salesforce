@@ -1,0 +1,5 @@
+[tools]
+node = "24"
+python = "3.12"
+"npm:@salesforce/cli" = "latest"
+"npm:@fission-ai/openspec" = "latest"
