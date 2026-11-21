@@ -1,0 +1,7 @@
+{
+  "enabledPlugins": {
+    "salesforce-development@salesforce": true,
+    "platform-lightning-widgets@salesforce": true,
+    "salesforce-code-quality@salesforce": true
+  }
+}
