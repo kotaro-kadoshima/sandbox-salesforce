@@ -1,0 +1,55 @@
+{
+  "title": "Find Response",
+  "description": "Output of the FindAction invocable action (payload inside the MCP envelope).",
+  "type": "object",
+  "lightning:type": "lightning__objectType",
+  "lightning:tags": ["mcp"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "noticeTitle": {
+      "title": "Notice Title",
+      "description": "Title of the data-handling notice.",
+      "lightning:type": "lightning__textType"
+    },
+    "noticeConfidential": {
+      "title": "Notice: Confidential",
+      "description": "Data-handling notice: the data may contain confidential information.",
+      "lightning:type": "lightning__textType"
+    },
+    "noticeShareCheck": {
+      "title": "Notice: Share Check",
+      "description": "Data-handling notice: check the recipients and the content before sharing.",
+      "lightning:type": "lightning__textType"
+    },
+    "noticeResponsibility": {
+      "title": "Notice: Responsibility",
+      "description": "Data-handling notice: the user is responsible for handling the data.",
+      "lightning:type": "lightning__textType"
+    },
+    "succeeded": {
+      "title": "Succeeded",
+      "description": "True when the query ran. False when the input was rejected or the query failed.",
+      "lightning:type": "lightning__booleanType"
+    },
+    "errorMessage": {
+      "title": "Error Message",
+      "description": "Why the call failed. Empty when it succeeded.",
+      "lightning:type": "lightning__textType"
+    },
+    "recordCount": {
+      "title": "Record Count",
+      "description": "Number of records returned. For SELECT COUNT() queries, the number of matching records.",
+      "lightning:type": "lightning__integerType"
+    },
+    "truncated": {
+      "title": "Truncated",
+      "description": "True when more records matched than the limit of 200 and the result was cut off.",
+      "lightning:type": "lightning__booleanType"
+    },
+    "resultJson": {
+      "title": "Result JSON",
+      "description": "The result as a JSON string.",
+      "lightning:type": "lightning__textType"
+    }
+  }
+}

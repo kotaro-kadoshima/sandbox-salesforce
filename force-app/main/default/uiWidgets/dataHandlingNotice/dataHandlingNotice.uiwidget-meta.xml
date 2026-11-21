@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Data Handling Notice</masterLabel>
+    <description>Shows the data-handling notice (title and three statements) returned by the read-only MCP tools.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

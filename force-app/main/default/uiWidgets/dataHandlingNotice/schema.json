@@ -1,0 +1,32 @@
+{
+  "title": "Data Handling Notice",
+  "description": "Displays the data-handling notice: a title and three statements about confidentiality, checking before sharing, and the user's responsibility.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "noticeTitle": {
+          "title": "Notice Title",
+          "description": "Title of the notice, shown next to the warning icon.",
+          "lightning:type": "lightning__textType"
+        },
+        "noticeConfidential": {
+          "title": "Notice: Confidential",
+          "description": "Statement that the data may contain confidential information.",
+          "lightning:type": "lightning__textType"
+        },
+        "noticeShareCheck": {
+          "title": "Notice: Share Check",
+          "description": "Statement asking the user to check the recipients and the content before sharing.",
+          "lightning:type": "lightning__textType"
+        },
+        "noticeResponsibility": {
+          "title": "Notice: Responsibility",
+          "description": "Statement that the user is responsible for handling the data.",
+          "lightning:type": "lightning__textType"
+        }
+      }
+    }
+  }
+}

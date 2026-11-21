@@ -1,0 +1,15 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/dataHandlingNotice",
+        "attributes": {
+          "noticeTitle": "{!$attrs.outputValues.noticeTitle}",
+          "noticeConfidential": "{!$attrs.outputValues.noticeConfidential}",
+          "noticeShareCheck": "{!$attrs.outputValues.noticeShareCheck}",
+          "noticeResponsibility": "{!$attrs.outputValues.noticeResponsibility}"
+        }
+      }
+    }
+  }
+}
