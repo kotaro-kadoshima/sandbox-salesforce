@@ -93,7 +93,7 @@ CLI から直接開く場合は `sf org open --target-org handson --path /lightn
 2. 「操作名」（変更不可）を見て、どのクラスのツールかを確かめる。
 3. 「ツール表示ラベル」と「ツール名」を、[設定する値](#設定する値)の表のとおりにする（例: `SoqlQueryAction` → `soqlQuery`）。
 4. アノテーションの「参照のみ」と「冪等」にチェックを入れる。「破壊的」と「オープンワールド」はオフのまま。
-5. 「説明」は変えない。sobject-reads の説明文が入っている。注意喚起などの追記はタスク 9.2 で XML に入れる。
+5. 「説明」は変えない。sobject-reads の説明文が入っていて、そのまま使う（design D6）。
 6. 「保存」を押す。
 
 ![ツールの詳細を編集の画面](images/readonly-mcp-server-setup/11-edit-tool.png)
@@ -122,7 +122,7 @@ sf project retrieve start --metadata McpServerDefinition:ReadOnlyRecordsServer -
 
 ### 6. ウィジェットを関連付けてデプロイし、サーバーを有効にする
 
-画面ではできない設定（ウィジェットの関連付けと説明文の追記）を、retrieve した XML に入れてデプロイしてから、Setup でサーバーを有効にする。
+画面ではできない設定（ウィジェットの関連付け）を、retrieve した XML に入れてデプロイしてから、Setup でサーバーを有効にする。
 
 #### 6-1. CLT とウィジェットをデプロイする（タスク 8.4）
 
@@ -140,17 +140,19 @@ sf project deploy start --metadata LightningTypeBundle:soqlQuery --metadata Ligh
 
 - `<resources>` を 3 つ。`resourceName` はツール名と同じにし、`resourceUri` は `ui://widget/lightningType/c__<エンベロープ CLT 名>` にする。
 - 各 `<tools>` に、対応する `resourceName` を指す `<uiResource>`。
-- 各ツールの `<descriptionOverride>` の末尾に、入力は 1 件だけ送ることと、注意喚起をデータより先にそのまま利用者に伝えることを英語で書き足す（design D6）。
+`<descriptionOverride>` は Setup が入れた sobject-reads の説明文のまま変えない（design D6）。
 
 ```sh
 sf project deploy start --metadata McpServerDefinition:ReadOnlyRecordsServer --target-org handson --wait 30 --json
 ```
 
-サーバーが無効のうちにデプロイする。有効なサーバーは編集できない。
+Setup の画面では、有効なサーバーのツールを編集できない。メタデータのデプロイは、サーバーが有効なままでも通る（2026-11-21 に確認）。
 
-デプロイしたあと、Setup のツールタブで、説明文に追記が反映されたことを確かめる。ツールの行の左の「>」で、ソースと入出力スキーマも確認できる。
+デプロイしたあと、Setup のツールタブで、ツールの行の左の「>」を押すと、説明文・ソース・入出力スキーマを確認できる。
 
-![デプロイ後のツール（説明文の追記が反映されている）](images/readonly-mcp-server-setup/13-tools-after-deploy.png)
+![デプロイ後のツール](images/readonly-mcp-server-setup/13-tools-after-deploy.png)
+
+この画像は、説明文に注意喚起の伝達の指示を書き足していた時点のもの。指示はあとで外した（tasks 9.4）。
 
 **Setup の画面には、ツールとリソース（ウィジェット）の関連付けが表示されない。** 関連付けが保存されたかどうかは、組織から retrieve し直し、3 つの `<uiResource>` と `<resources>` が入っていることで確かめる。作業用のフォルダに取り出すと、ローカルのファイルを上書きしない。
 
