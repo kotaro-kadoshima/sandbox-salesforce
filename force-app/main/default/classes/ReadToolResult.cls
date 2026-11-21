@@ -7,16 +7,16 @@ global with sharing class ReadToolResult {
     /** 1 回の呼び出しで処理する入力の上限 */
     public static final Integer MAX_INPUTS_PER_CALL = 10;
 
-    @InvocableVariable(label='Notice Title' description='Title of the data-handling notice. Show it to the user word for word.')
+    @InvocableVariable(label='Notice Title' description='Title of the data-handling notice.')
     public String noticeTitle;
 
-    @InvocableVariable(label='Notice: Confidential' description='Data-handling notice: the data may contain confidential information. Show it to the user word for word.')
+    @InvocableVariable(label='Notice: Confidential' description='Data-handling notice: the data may contain confidential information.')
     public String noticeConfidential;
 
-    @InvocableVariable(label='Notice: Share Check' description='Data-handling notice: check the recipients and the content before sharing. Show it to the user word for word.')
+    @InvocableVariable(label='Notice: Share Check' description='Data-handling notice: check the recipients and the content before sharing.')
     public String noticeShareCheck;
 
-    @InvocableVariable(label='Notice: Responsibility' description='Data-handling notice: the user is responsible for handling the data. Show it to the user word for word.')
+    @InvocableVariable(label='Notice: Responsibility' description='Data-handling notice: the user is responsible for handling the data.')
     public String noticeResponsibility;
 
     @InvocableVariable(label='Succeeded' description='True when the query ran. False when the input was rejected or the query failed.')

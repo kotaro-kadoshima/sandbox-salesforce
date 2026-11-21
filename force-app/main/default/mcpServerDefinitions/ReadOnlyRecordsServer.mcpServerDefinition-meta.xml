@@ -26,7 +26,7 @@
             <apiSource>API_CATALOG</apiSource>
             <operation>ListRecentSobjectRecordsAction</operation>
         </apiDefinition>
-        <descriptionOverride>Returns records of a specific type that the user recently viewed or modified. Use this as a starting point when the user refers to &quot;my accounts,&quot; &quot;recent cases,&quot; or &quot;that opportunity I was looking at&quot; without providing specific IDs or names. Send exactly one object in inputs: the result renders as a widget only for a single request. For several object types, call the tool once for each. Every response, including one with no records or a failed call, contains a data-handling notice (noticeTitle, noticeConfidential, noticeShareCheck, noticeResponsibility). Always show the notice to the user word for word, before any data.</descriptionOverride>
+        <descriptionOverride>Returns records of a specific type that the user recently viewed or modified. Use this as a starting point when the user refers to &quot;my accounts,&quot; &quot;recent cases,&quot; or &quot;that opportunity I was looking at&quot; without providing specific IDs or names.</descriptionOverride>
         <destructive>false</destructive>
         <idempotent>true</idempotent>
         <openWorld>false</openWorld>
@@ -42,7 +42,7 @@
             <apiSource>API_CATALOG</apiSource>
             <operation>FindAction</operation>
         </apiDefinition>
-        <descriptionOverride>Executes a text search across multiple Salesforce objects simultaneously. Use this instead of `soqlQuery` when searching for a term that could exist in multiple object types, or when you don&apos;t know which object contains the data. Send exactly one object in inputs: the result renders as a widget only for a single request. For several searches, call the tool once for each. Every response, including one with no records or a failed call, contains a data-handling notice (noticeTitle, noticeConfidential, noticeShareCheck, noticeResponsibility). Always show the notice to the user word for word, before any data.</descriptionOverride>
+        <descriptionOverride>Executes a text search across multiple Salesforce objects simultaneously. Use this instead of `soqlQuery` when searching for a term that could exist in multiple object types, or when you don&apos;t know which object contains the data.</descriptionOverride>
         <destructive>false</destructive>
         <idempotent>true</idempotent>
         <openWorld>false</openWorld>
@@ -58,7 +58,7 @@
             <apiSource>API_CATALOG</apiSource>
             <operation>SoqlQueryAction</operation>
         </apiDefinition>
-        <descriptionOverride>Executes a SOQL query to retrieve Salesforce records. This is the primary way to read data when you know which object and fields you need. SOQL syntax: `SELECT fields FROM Object WHERE conditions ORDER BY field LIMIT n`. Supports relationship queries to traverse lookups and subqueries for child records. Always include a WHERE clause and a LIMIT clause. For large objects, filter on indexed fields to avoid timeout errors. Send exactly one object in inputs: the result renders as a widget only for a single request. For several queries, call the tool once for each. Every response, including one with no records or a failed call, contains a data-handling notice (noticeTitle, noticeConfidential, noticeShareCheck, noticeResponsibility). Always show the notice to the user word for word, before any data.</descriptionOverride>
+        <descriptionOverride>Executes a SOQL query to retrieve Salesforce records. This is the primary way to read data when you know which object and fields you need. SOQL syntax: `SELECT fields FROM Object WHERE conditions ORDER BY field LIMIT n`. Supports relationship queries to traverse lookups and subqueries for child records. Always include a WHERE clause and a LIMIT clause. For large objects, filter on indexed fields to avoid timeout errors.</descriptionOverride>
         <destructive>false</destructive>
         <idempotent>true</idempotent>
         <openWorld>false</openWorld>
