@@ -60,17 +60,20 @@ Apex は `platform-apex-generate`、テストは `platform-apex-test-generate` �
 
 - [x] 9.1 retrieve した XML に、design D5 の表のとおり `<resources>` を 3 つ（`resourceName`・`resourceUri`・`resourceTitle`・`description`）足す。各 `resourceUri` が `ui://widget/lightningType/c__<エンベロープ CLT 名>` の形で、8 で作った CLT 名と一致していれば完了
 - [x] 9.2 3 つの `<tools>` に、`<toolName>` と `<toolTitle>`（`soqlQuery`・`find`・`listRecentSobjectRecords`）、`<uiResource>`、注釈（`readOnly=true`・`destructive=false`・`idempotent=true`・`openWorld=false`・`returnDirect=false`）、design D6 の `descriptionOverride`（sobject-reads の説明文に、入力 1 件だけ送ることと注意喚起をそのまま伝えることを書き足したもの）を設定する。各ツールの `<uiResource>` が、対応する `<resources>` の `resourceName` と完全に一致していれば完了
+  - 計画変更（2026-11-21）: `descriptionOverride` への追記は取りやめた（design D6）。元に戻す作業は 9.4
 - [x] 9.3 McpServerDefinition をデプロイし、Setup でサーバーを有効にする。デプロイが成功し、Setup でサーバーが有効、3 つのツールにリソースが関連付いていれば完了。`<toolName>` の書き換えでデプロイが失敗した場合は、design の Risks のとおり、ほかの方法を確かめてからユーザーに相談する
   - 結果（2026-11-21）: dry-run のあとにデプロイが成功し、Setup で有効にした（一覧で「稼働中」）。Setup の画面にはリソースの関連付けが表示されないため、組織から retrieve し直して、3 つの `<uiResource>` と `<resources>` がローカルと同じ値で保存されていることを確かめた。組織が返す XML は要素がアルファベット順（`<uiResource>` が `<toolTitle>` の後ろ）だったので、ローカルのファイルもその並びにした。手順は [docs/procedures/readonly-mcp-server-setup.md](../../../docs/procedures/readonly-mcp-server-setup.md) の 6
+- [x] 9.4 design D6（計画変更 2026-11-21）のとおり、モデルへの伝達の指示を外す。各ツールの `descriptionOverride` を sobject-reads の説明文だけに戻し、`ReadToolResult` の注意喚起 4 項目の `@InvocableVariable` の `description` から「Show it to the user word for word.」を外す。Apex のテストを組織で実行してから、Apex と McpServerDefinition をデプロイする。有効なサーバーで McpServerDefinition のデプロイが通らない場合は、Setup で無効にしてからデプロイし、有効に戻す（画面操作は手順書に追記する）。テストが通り、Setup のツールの説明と Actions REST API の describe の出力項目の説明に、伝達を求める文が残っていなければ完了
+  - 結果（2026-11-21）: `ReadToolResult` を 5 つのテストクラス（68 件、すべて成功）付きでデプロイした。McpServerDefinition は、サーバーが有効なままでもデプロイできた（無効にする必要はなかった）。組織から retrieve し直した XML はローカルと一致し、3 つの説明文は sobject-reads の原文と同じ。Actions REST API の describe の出力項目の説明にも、伝達を求める文は残っていない。デプロイ後もサーバーは「稼働中」
 
 ## 10. 受け入れ確認
 
 - [ ] 10.1 Claude Desktop（claude.ai のカスタムコネクタ）に新しいサーバーを接続する。ツール一覧に `soqlQuery`・`find`・`listRecentSobjectRecords` の 3 つだけが読み取り専用として表示され、入力がそれぞれ `query`・`search`・`sobjectName` だけなら完了。接続に使ったエンドポイント URL と外部クライアントアプリケーションを書き残す
 - [ ] 10.2 Claude Desktop で 3 つのツールをそれぞれ入力 1 件で実行し、結果あり・0 件・エラー（`soqlQuery` に `DELETE FROM Account` を渡すなど）のどれでも注意喚起のウィジェットが表示されれば完了
   - 途中経過（2026-11-21）: `listRecentSobjectRecords`（`Account`、0 件）でウィジェットが表示された。0 件は正しい結果（組織の閲覧履歴に取引先がなく、Contact と Opportunity が 8 件ずつ）。モデルはテキストでも注意喚起を伝えたが、3 つの文言のうち 2 つの順序を入れ替えていた。ツール名の横に「未認証」と表示される
-- [ ] 10.3 ウィジェットを表示しないクライアント（Claude Code から claude.ai のコネクタ経由、または Slackbot）で 3 つのツールを実行し、出力テキストに見出しと 3 つの文言が含まれ、モデルが利用者に伝えていれば完了。モデルが伝えなかったクライアントがあれば書き残す
+- [ ] 10.3 （計画変更 2026-11-21: ウィジェットを表示できないクライアントは対象外にしたため、確認内容を変えた）9.4 のあと、Claude Desktop で、ツール一覧の説明が sobject-reads と同じであることと、ツールを入力 1 件で実行してウィジェットが表示されることを確かめる。モデルが回答のテキストで注意喚起を繰り返したかどうかと、入力 2 件以上で呼んだことがあったかを書き残したら完了
 - [ ] 10.4 組織の共有設定（OWD）を確認し、非公開のオブジェクトで、権限の少ないユーザーとして接続して、共有されていないレコードと参照権限のない項目が返らないことを確かめたら完了。非公開のオブジェクトがない場合は、組織の設定を変えずにユーザーと確認方法を相談する
-- [ ] 10.5 Setup でラベル `DataNotice_Title` の文言を一時的に変え、次の呼び出しでウィジェットとテキストの両方に新しい文言が出ることを確かめてから、元に戻したら完了
+- [ ] 10.5 Setup でラベル `DataNotice_Title` の文言を一時的に変え、次の呼び出しでウィジェットに新しい文言が出ることを確かめてから、元に戻したら完了
 - [ ] 10.6 運用の前提（design D7）として、機密の項目が項目レベルセキュリティで保護されているかと、サーバーを使えるユーザーの範囲をユーザーと確認し、結果を書き残したら完了
 
 ## Workflow follow-up
