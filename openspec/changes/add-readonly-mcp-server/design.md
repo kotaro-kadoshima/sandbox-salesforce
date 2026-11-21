@@ -36,7 +36,7 @@
 
 - McpServerDefinition `ReadOnlyRecordsServer`（表示ラベル「Read Only Records Server」）を新しく作る。既存の `HandsonPipelineServer` は変えない。
 - 手順は「Setup でサーバーを作ってツールを追加 → retrieve → XML を編集 → デプロイ」。`apiIdentifier` と `operation` は Setup が生成した値をそのまま使う。
-- 編集で `<toolName>` と `<toolTitle>` を `soqlQuery`・`find`・`listRecentSobjectRecords` に書き換える。Setup が生成する名前はクラス名をもとにした長い名前になり、sobject-reads と一致しないため。
+- `<toolName>` と `<toolTitle>` を `soqlQuery`・`find`・`listRecentSobjectRecords` にする。Setup が生成する名前はクラス名をもとにした長い名前になり（64 文字で切れる）、sobject-reads と一致しないため。Setup のツールの編集画面でツール名・表示ラベル・注釈を設定できたので、XML の編集ではなく Setup で設定した（手順は [docs/procedures/readonly-mcp-server-setup.md](../../../docs/procedures/readonly-mcp-server-setup.md)）。
 - 3 つのツールの注釈は `readOnly=true`・`destructive=false`・`idempotent=true`・`openWorld=false`・`returnDirect=false` とする。
 - 代替案: XML を一から書いてデプロイする。`apiIdentifier` などの生成規則を推測することになるため採らない。
 
@@ -159,6 +159,7 @@ design で確認したいこと 1 への回答。
   6. コロンの直後（空白を挟んでもよい）に英字か `_` が続く（バインド変数）。日付リテラルは `LAST_N_DAYS:30` のようにコロンの直後が数字なので対象にならない。念のため、実行も空の Map の `queryWithBinds` で行い、Apex のローカル変数が参照されないようにする。
 - 件数上限（括弧のマスク済みの文字列で外側の LIMIT と OFFSET を探す）
   - `SELECT COUNT() FROM ...` の形なら、そのまま `countQueryWithBinds` で件数を数える。
+  - GROUP BY のない集計クエリ（`SELECT COUNT(Id) FROM Account` など）は 1 行しか返さないので、LIMIT を足さない。利用者が LIMIT を付けていたら、実行前に拒否する。Salesforce はこの組み合わせを捕捉できない例外（`System.UnexpectedException`）で止め、注意喚起も返せなくなるため（実装時のテストで確認）。集計関数と GROUP BY はサブクエリに書けないので、判定はリテラルだけをマスクした文字列で行う（`FORMAT(SUM(...))` のような入れ子も見分けられる）。
   - 外側の `LIMIT n` が 200 以下なら、そのまま実行する。
   - 外側の `LIMIT n` が 200 を超えるなら、数値を 201 に置き換える。
   - 外側に LIMIT がなく OFFSET があれば、OFFSET の直前に `LIMIT 201` を入れる。LIMIT も OFFSET もなければ末尾に ` LIMIT 201` を足す（`FOR` や `UPDATE` の句は拒否済みなので、末尾が LIMIT の正しい位置になる）。
@@ -229,13 +230,13 @@ design で確認したいこと 3 への回答。再現するのは `soqlQuery`�
 
 ## Risks / Trade-offs
 
-- [`<toolName>` を書き換えたデプロイが受け付けられず、ツール名を sobject-reads に合わせられない] → デプロイで確かめる。だめなら Setup の画面でツール名を設定できるか確かめ、それでも無理なら spec の修正をユーザーと相談する。
+- [`<toolName>` を書き換えたデプロイが受け付けられず、ツール名を sobject-reads に合わせられない] → Setup の画面でツール名を設定できることを確認し、そこで設定した（D1）。9 のデプロイでは `<toolName>` を変えない。
 - [Apex の `Search.query` が `FIND {...}` の形を受け付けない] → テストで確かめ、受け付けない場合は検索語を `'...'` の形に変換する。
 - [マスクの誤りで、LIMIT の位置を間違えたり、正しいクエリを拒否したりする] → spec のシナリオに加え、リテラル内の括弧や引用符、入れ子のサブクエリをテストで確かめる。
-- [集計関数だけのクエリ（`SELECT COUNT(Id) FROM Account` など）に LIMIT を足すと、Salesforce がエラーにする] → テストで確かめる。エラーになる場合は、GROUP BY のない集計クエリには LIMIT を足さない（結果は 1 行なので上限を超えない）。
+- [集計関数だけのクエリ（`SELECT COUNT(Id) FROM Account` など）に LIMIT を足すと、Salesforce がエラーにする] → テストで発生を確認した（捕捉できない `System.UnexpectedException`）。GROUP BY のない集計クエリには LIMIT を足さず、利用者が付けた LIMIT は実行前に拒否する（D8）。
 - [ウィジェット非対応のクライアントで、モデルが注意喚起を伝えない] → 出力テキストに全文を入れ、ツールの説明で伝えるよう指示する。モデルの振る舞いまでは保証できないため、Slackbot などで受け入れ確認する。
 - [入力が 2 件以上だとウィジェットが表示されない] → ツールの説明で入力 1 件を求める。テキストの注意喚起はすべての応答に入る。
-- [捕捉できない LimitException では注意喚起も返らない] → 件数上限と入力件数の上限で、制限に届かないようにする。
+- [捕捉できない例外（LimitException や一部の UnexpectedException）では注意喚起も返らない] → 件数上限と入力件数の上限で制限に届かないようにし、捕捉できない例外を起こすとわかったクエリの形は実行前に拒否する。
 - [Code Analyzer の `ApexSOQLInjection` が、利用者のクエリを渡す箇所を指摘する] → 書き換えは LIMIT の整数だけにする。それでも指摘が出たら、抑止（`@SuppressWarnings`）で 0 件にはせず、対応方法を相談する。
 - [正規表現によるチェックは SOQL と SOSL を完全には解析できない] → チェックの役割は副作用のある句・バインド変数・件数に限る。権限の境界は USER_MODE が担う。
 - [広い権限を持つユーザーには広い範囲が返る] → 利用できるユーザーを外部クライアントアプリケーションや権限セットで絞る運用を、受け入れ時に確認する。
@@ -259,4 +260,4 @@ design で確認したいこと 3 への回答。再現するのは `soqlQuery`�
 ## Open Questions
 
 - 組織でクラシック暗号化の項目を使っているか（未確認）。使っている場合は、Apex での値の扱いを公開前に確認する。
-- 新しいサーバーのエンドポイント URL と、既存の外部クライアントアプリケーションをそのまま使えるか。サーバー作成後に Setup で確認する。
+- 既存の外部クライアントアプリケーションをそのまま使えるか（受け入れ確認 10.1 で確かめる）。エンドポイント URL は、サーバー作成後の Setup で `https://api.salesforce.com/platform/mcp/v1/d/<My ドメインの組織部分>/develop/custom/ReadOnlyRecordsServer` の形と確認した。
