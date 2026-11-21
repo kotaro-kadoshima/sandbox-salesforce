@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<McpServerDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>SOQL・SOSL・最近使ったレコードで Salesforce のレコードを読み取る、読み取り専用のサーバー。応答には機密情報の取り扱いの注意喚起が付く</description>
+    <masterLabel>Read Only Records Server</masterLabel>
+    <resources>
+        <description>Shows the data-handling notice that comes with every soqlQuery response.</description>
+        <resourceName>soqlQuery</resourceName>
+        <resourceTitle>SOQL Query</resourceTitle>
+        <resourceUri>ui://widget/lightningType/c__soqlQuery</resourceUri>
+    </resources>
+    <resources>
+        <description>Shows the data-handling notice that comes with every find response.</description>
+        <resourceName>find</resourceName>
+        <resourceTitle>Find</resourceTitle>
+        <resourceUri>ui://widget/lightningType/c__find</resourceUri>
+    </resources>
+    <resources>
+        <description>Shows the data-handling notice that comes with every listRecentSobjectRecords response.</description>
+        <resourceName>listRecentSobjectRecords</resourceName>
+        <resourceTitle>List Recent SObject Records</resourceTitle>
+        <resourceUri>ui://widget/lightningType/c__listRecentSobjectRecords</resourceUri>
+    </resources>
+    <tools>
+        <apiDefinition>
+            <apiIdentifier>aa:apex-ListRecentSobjectRecordsAction</apiIdentifier>
+            <apiSource>API_CATALOG</apiSource>
+            <operation>ListRecentSobjectRecordsAction</operation>
+        </apiDefinition>
+        <descriptionOverride>Returns records of a specific type that the user recently viewed or modified. Use this as a starting point when the user refers to &quot;my accounts,&quot; &quot;recent cases,&quot; or &quot;that opportunity I was looking at&quot; without providing specific IDs or names. Send exactly one object in inputs: the result renders as a widget only for a single request. For several object types, call the tool once for each. Every response, including one with no records or a failed call, contains a data-handling notice (noticeTitle, noticeConfidential, noticeShareCheck, noticeResponsibility). Always show the notice to the user word for word, before any data.</descriptionOverride>
+        <destructive>false</destructive>
+        <idempotent>true</idempotent>
+        <openWorld>false</openWorld>
+        <readOnly>true</readOnly>
+        <returnDirect>false</returnDirect>
+        <toolName>listRecentSobjectRecords</toolName>
+        <toolTitle>listRecentSobjectRecords</toolTitle>
+        <uiResource>listRecentSobjectRecords</uiResource>
+    </tools>
+    <tools>
+        <apiDefinition>
+            <apiIdentifier>aa:apex-FindAction</apiIdentifier>
+            <apiSource>API_CATALOG</apiSource>
+            <operation>FindAction</operation>
+        </apiDefinition>
+        <descriptionOverride>Executes a text search across multiple Salesforce objects simultaneously. Use this instead of `soqlQuery` when searching for a term that could exist in multiple object types, or when you don&apos;t know which object contains the data. Send exactly one object in inputs: the result renders as a widget only for a single request. For several searches, call the tool once for each. Every response, including one with no records or a failed call, contains a data-handling notice (noticeTitle, noticeConfidential, noticeShareCheck, noticeResponsibility). Always show the notice to the user word for word, before any data.</descriptionOverride>
+        <destructive>false</destructive>
+        <idempotent>true</idempotent>
+        <openWorld>false</openWorld>
+        <readOnly>true</readOnly>
+        <returnDirect>false</returnDirect>
+        <toolName>find</toolName>
+        <toolTitle>find</toolTitle>
+        <uiResource>find</uiResource>
+    </tools>
+    <tools>
+        <apiDefinition>
+            <apiIdentifier>aa:apex-SoqlQueryAction</apiIdentifier>
+            <apiSource>API_CATALOG</apiSource>
+            <operation>SoqlQueryAction</operation>
+        </apiDefinition>
+        <descriptionOverride>Executes a SOQL query to retrieve Salesforce records. This is the primary way to read data when you know which object and fields you need. SOQL syntax: `SELECT fields FROM Object WHERE conditions ORDER BY field LIMIT n`. Supports relationship queries to traverse lookups and subqueries for child records. Always include a WHERE clause and a LIMIT clause. For large objects, filter on indexed fields to avoid timeout errors. Send exactly one object in inputs: the result renders as a widget only for a single request. For several queries, call the tool once for each. Every response, including one with no records or a failed call, contains a data-handling notice (noticeTitle, noticeConfidential, noticeShareCheck, noticeResponsibility). Always show the notice to the user word for word, before any data.</descriptionOverride>
+        <destructive>false</destructive>
+        <idempotent>true</idempotent>
+        <openWorld>false</openWorld>
+        <readOnly>true</readOnly>
+        <returnDirect>false</returnDirect>
+        <toolName>soqlQuery</toolName>
+        <toolTitle>soqlQuery</toolTitle>
+        <uiResource>soqlQuery</uiResource>
+    </tools>
+</McpServerDefinition>
