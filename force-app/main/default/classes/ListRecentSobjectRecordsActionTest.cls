@@ -107,6 +107,43 @@ private class ListRecentSobjectRecordsActionTest {
         assertFailed(result);
     }
 
+    @IsTest
+    static void shouldExcludeRecord_WhenAccessRevokedAfterViewing() {
+        // Given: 共有設定が非公開のオブジェクトで、ユーザーが自分のレコード 2 件を表示した履歴
+        User restrictedUser;
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            restrictedUser = TestDataFactory.createUserWithoutAccountRead();
+            TestDataFactory.grantPrivateObjectReadCreate(restrictedUser);
+        }
+        CustomObject1__c revoked = new CustomObject1__c(Name = 'Revoked');
+        CustomObject1__c kept = new CustomObject1__c(Name = 'Kept');
+        System.runAs(restrictedUser) {
+            insert new List<CustomObject1__c>{ revoked, kept };
+            List<CustomObject1__c> viewed = [SELECT Id FROM CustomObject1__c WHERE Id IN (:revoked.Id, :kept.Id) WITH USER_MODE FOR VIEW];
+            Assert.areEqual(2, viewed.size(), '前提: 履歴を作るレコードを参照できる');
+        }
+
+        // 所有者を変えて、1 件だけ参照できなくする
+        update new CustomObject1__c(Id = revoked.Id, OwnerId = UserInfo.getUserId());
+        System.runAs(restrictedUser) {
+            Integer visible = [SELECT COUNT() FROM CustomObject1__c WHERE Id = :revoked.Id WITH USER_MODE];
+            Assert.areEqual(0, visible, '前提: CustomObject1__c の共有設定が非公開で、所有者を変えたレコードは参照できない');
+        }
+
+        // When
+        ReadToolResult result;
+        Test.startTest();
+        System.runAs(restrictedUser) {
+            result = execute('CustomObject1__c');
+        }
+        Test.stopTest();
+
+        // Then
+        assertSucceeded(result, 1, false);
+        List<Object> records = (List<Object>) JSON.deserializeUntyped(result.resultJson);
+        Assert.areEqual(kept.Id, (Id) ((Map<String, Object>) records[0]).get('Id'), '参照できるレコードだけが返る');
+    }
+
     // ─── Helpers ─────────────────────────────────────────────────
 
     /**

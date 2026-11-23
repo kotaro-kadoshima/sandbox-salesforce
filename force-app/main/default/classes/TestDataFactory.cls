@@ -120,4 +120,16 @@ public class TestDataFactory {
         insert new ObjectPermissions(ParentId = permissionSet.Id, SobjectType = 'Account', PermissionsRead = true);
         insert new PermissionSetAssignment(AssigneeId = user.Id, PermissionSetId = permissionSet.Id);
     }
+
+    /**
+     * 共有設定が非公開のカスタムオブジェクト（CustomObject1__c）の参照と作成の権限だけを持つ権限セットを作り、ユーザーに割り当てる。
+     * 設定オブジェクトの DML なので、レコードとは別の System.runAs の中で呼ぶ。
+     * @param user 割り当てるユーザー
+     */
+    public static void grantPrivateObjectReadCreate(User user) {
+        PermissionSet permissionSet = new PermissionSet(Name = 'ReadToolPrivateObject', Label = 'Read Tool Private Object');
+        insert permissionSet;
+        insert new ObjectPermissions(ParentId = permissionSet.Id, SobjectType = 'CustomObject1__c', PermissionsRead = true, PermissionsCreate = true);
+        insert new PermissionSetAssignment(AssigneeId = user.Id, PermissionSetId = permissionSet.Id);
+    }
 }
