@@ -5,7 +5,7 @@ Apex は `platform-apex-generate`、テストは `platform-apex-test-generate` �
 ## 1. 注意喚起の文言と共通の応答
 
 - [x] 1.1 組織の既定の言語（`Organization.LanguageLocaleKey`）を `sf data query` で確認し、カスタム表示ラベルの `language` に使う値を決める。確認した値をこのタスクに書き残したら完了
-  - 結果（2026-11-21）: `LanguageLocaleKey` は `en_US`。ラベルの `language` は `en_US` にし、値は日本語の文言をそのまま入れる。参考: OWD は Account・Opportunity が `Edit`、Contact が `ControlledByParent`、Lead・Case が `ReadEditTransfer` で、非公開の標準オブジェクトはない（10.4 で使う）
+  - 結果（2026-11-21）: `LanguageLocaleKey` は `en_US`。ラベルの `language` は `en_US` にし、値は日本語の文言をそのまま入れる。参考: OWD は Account・Opportunity が `Edit`、Contact が `ControlledByParent`、Lead・Case が `ReadEditTransfer` で、この 5 つに非公開のものはない（10.4 で使う）。訂正（2026-11-22）: 「非公開の標準オブジェクトはない」と書いていたが、確かめたのはこの 5 つだけだった。組織全体では WorkOrder・Incident など 75 個が非公開
 - [x] 1.2 `force-app/main/default/labels/CustomLabels.labels-meta.xml` に、design D4 の 4 つのラベル（`DataNotice_Title`・`DataNotice_Confidential`・`DataNotice_ShareCheck`・`DataNotice_Responsibility`、カテゴリ `McpDataNotice`）を作る。4 つのラベルがあり、`sf project deploy validate` で構文エラーが出なければ完了
 - [x] 1.3 共通の応答クラス `ReadToolResult`（design D3 の 9 項目、`global`、`@InvocableVariable`）と、ラベルから注意喚起を入れる `DataHandlingNotice` を作る。`ReadToolResult` はコンストラクタで必ず注意喚起を入れる。テストで、生成直後の応答に 4 項目がラベルと同じ値で入っていることを確かめ、テストが通れば完了
 
@@ -31,8 +31,9 @@ Apex は `platform-apex-generate`、テストは `platform-apex-test-generate` �
 
 ## 5. listRecentSobjectRecords ツール
 
-- [ ] 5.1 `ListRecentSobjectRecordsAction`（`global with sharing`、`@InvocableMethod`、入力は必須の `sobjectName` だけ）を design D10 のとおり作る。説明文は sobject-reads の `listRecentSobjectRecords` から写す。テストでは作ったレコードを `FOR VIEW` 付きで参照して履歴を作り、指定した種類だけが新しい順で返ること・`sobjectName` がないときの失敗・存在しないオブジェクトの拒否・アクセス権のないレコードの除外と、すべての応答に注意喚起があることを確かめ、テストが通れば完了。テストで履歴が作れない、または `WITH USER_MODE` が使えないとわかった場合は、その結果をこのタスクに書き残し、design の Risks の代替案で進めてよいかユーザーに確認する
+- [x] 5.1 `ListRecentSobjectRecordsAction`（`global with sharing`、`@InvocableMethod`、入力は必須の `sobjectName` だけ）を design D10 のとおり作る。説明文は sobject-reads の `listRecentSobjectRecords` から写す。テストでは作ったレコードを `FOR VIEW` 付きで参照して履歴を作り、指定した種類だけが新しい順で返ること・`sobjectName` がないときの失敗・存在しないオブジェクトの拒否・アクセス権のないレコードの除外と、すべての応答に注意喚起があることを確かめ、テストが通れば完了。テストで履歴が作れない、または `WITH USER_MODE` が使えないとわかった場合は、その結果をこのタスクに書き残し、design の Risks の代替案で進めてよいかユーザーに確認する
   - 途中経過（2026-11-21）: 実装とテスト 7 件は完了（カバレッジ 100%）。`FOR VIEW` で履歴を作れ、`RecentlyViewed`・`UserRecordAccess` の `WITH USER_MODE` も使えた。ただし「アクセス権のないレコードの除外」は、組織の OWD がすべて公開で、閲覧後に参照できなくなる状況を作れず、テストで確かめられていない（確認方法をユーザーと相談中）
+  - 結果（2026-11-22）: ユーザーと相談し、既存のカスタムオブジェクト `CustomObject1__c` の共有設定を非公開にし、検索の許可とタブ（最近使ったレコードの記録に必要）を設定した（手順は [docs/procedures/private-custom-object-setup.md](../../../docs/procedures/private-custom-object-setup.md)、メタデータは retrieve 済み）。テスト `shouldExcludeRecord_WhenAccessRevokedAfterViewing` で、ユーザーが表示した 2 件のうち 1 件の所有者を変えて参照できなくし、その 1 件が返らないことを確かめた。共有設定が非公開であることは、テストの中で前提として確かめる。手動共有（`CustomObject1__Share`）ではなく所有者の変更を使ったのは、共有設定を戻すと `__Share` の型が消えてテストクラスがコンパイルできなくなるため。5 つのテストクラス（69 件）がすべて成功
 - [x] 5.2 Code Analyzer をセキュリティのルールで `ListRecentSobjectRecordsAction` に実行し、指摘が 0 件なら完了（出たら 2.3 と同じ扱い）
 
 ## 6. ラベルと Apex のデプロイ
